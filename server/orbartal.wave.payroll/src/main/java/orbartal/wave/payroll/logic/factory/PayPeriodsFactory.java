@@ -23,8 +23,8 @@ public class PayPeriodsFactory {
 	}
 
 	public List<PayPeriodDto> buildPeriodTwoWeeksPeriods(PayPeriodDto globalPeriod) {
-		LocalDate start = localDateFactory.buildWithMonthFirstDay(globalPeriod.getStart());
-		LocalDate end = localDateFactory.buidWithMonthLastDay(globalPeriod.getEnd());
+		LocalDate start = localDateFactory.buildWithMonthFirstDay(globalPeriod.getStartDate());
+		LocalDate end = localDateFactory.buidWithMonthLastDay(globalPeriod.getEndDate());
 		LocalDate prev = start;
 		LocalDate current = localDateFactory.buildNextDate(prev);
 		List<PayPeriodDto> results = new ArrayList<>();

@@ -27,7 +27,8 @@ public class EmployeeReportFactory {
 			return Optional.empty();
 		}
 		EmployeeReportDto dto = new EmployeeReportDto ();
-		dto.setAmountPaid(amount+"");
+		String amountPay = "$"+String.format("%.2f", amount);
+		dto.setAmountPaid(amountPay);
 		dto.setEmployeeId(uid);
 		dto.setPayPeriod(period);
 		return Optional.of(dto);

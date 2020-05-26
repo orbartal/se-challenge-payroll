@@ -39,16 +39,16 @@ public class PayPeriodsFactoryUnitTest {
 		LocalDate start = LocalDate.now();
 		LocalDate end = start.plusYears(1);
 		PayPeriodDto globalPeriod = new PayPeriodDto();
-		globalPeriod.setStart(start);
-		globalPeriod.setEnd(end);
+		globalPeriod.setStartDate(start);
+		globalPeriod.setEndDate(end);
 
 		List<PayPeriodDto> actual = fixture.buildPeriodTwoWeeksPeriods(globalPeriod);
 
 		assertEquals(26, actual.size());
 		for (int i=0; i<25; i++) {
-			LocalDate d1 = actual.get(i).getStart();
-			LocalDate d2 = actual.get(i).getEnd();
-			LocalDate d3 = actual.get(i+1).getStart();
+			LocalDate d1 = actual.get(i).getStartDate();
+			LocalDate d2 = actual.get(i).getEndDate();
+			LocalDate d3 = actual.get(i+1).getStartDate();
 
 	        Period period1 = Period.between(d1, d2);
 			assertEquals(0, period1.getYears());

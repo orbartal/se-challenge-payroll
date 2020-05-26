@@ -35,7 +35,7 @@ public class TimeReportItemDataReader {
 	}
 	
 	public Optional<EmployeeReportDto> readEmployeeReportByEmployeeUidAndPeriod(Long uid, PayPeriodDto period) {
-		List<TimeReportItemEntity> items = timeReportItemRepository.readPayAmountByEmployeeUidAndPeriod(uid, period.getStart(), period.getEnd());
+		List<TimeReportItemEntity> items = timeReportItemRepository.readPayAmountByEmployeeUidAndPeriod(uid, period.getStartDate(), period.getEndDate());
 		double amount = employeeReportFactory.calculateAmount(items);
 		return employeeReportFactory.buildOptionalEmployeeReport(uid, period, amount);
 	}
