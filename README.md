@@ -10,12 +10,13 @@ Please commit the following to this `README.md`:
 How to build, test, run and use the project server
 
 Download the project from url: https://github.com/orbartal/se-challenge-payroll
+You can downalod it as zip and extract it. Or use git clone.
 
 Install java 8 https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 Install maven https://www.baeldung.com/install-maven-on-windows-linux-mac
 
-In the terminal\cmd cd into dir “se-challenge-payroll” and run:
+In the terminal\cmd cd into dir “..\se-challenge-payroll-master\server\orbartal.wave.payroll” and run:
 
 mvn clean install test
 
