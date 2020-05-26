@@ -4,7 +4,8 @@
 
 Please commit the following to this `README.md`:
 
-1. Instructions on how to build/run your application
+
+1) Instructions on how to build/run your application
 
 How to build, test, run and use the project server
 
@@ -16,20 +17,21 @@ Install maven https://www.baeldung.com/install-maven-on-windows-linux-mac
 
 In the terminal\cmd cd into dir “interview.challenge.people” and run:
 
-4.1. mvn clean install test
+mvn clean install test
 
-4.2. mvn spring-boot:run
+mvn spring-boot:run
 
 Open any browser in url: http://localhost:8081/swagger-ui.html#
 And use swagger as the web client for the person server
 
-1. Answers to the following questions:
-   - How did you test that your implementation was correct?
+
+2) Answers to the following questions:
+  2.1) How did you test that your implementation was correct?
    
    I first wrote E2E test that are independent from the implementation and test the entire product using the rest api.
    I then use the E2E as guidance for implementation using TDD. I first wrote unit or integration test for each feature/class/method and only then wrote the main code that make the test pass. 
    
-   - If this application was destined for a production environment, what would you add or change?
+ 2.2) If this application was destined for a production environment, what would you add or change?
    
 I would first talk with the customer and ask some question to clearify the task:
 1. Can an employee ever shift between the two groups? For example, doctors and nurses rarely do, but week and weekend employees or day and night shift change constantly. 
@@ -49,7 +51,6 @@ In production I would have had:
 1. Message broker
 1. External log (for example use another micro service dedicate for storing logs).
 1. Run the micro service in docker manage by kubernetes 
-
 
 # Wave Software Development Challenge
 
