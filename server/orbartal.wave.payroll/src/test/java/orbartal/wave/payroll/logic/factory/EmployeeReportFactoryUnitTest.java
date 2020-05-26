@@ -62,7 +62,7 @@ public class EmployeeReportFactoryUnitTest {
 		
 		assertTrue(actual.isPresent());
 		EmployeeReportDto dto = actual.get();
-		assertEquals(amount+"", dto.getAmountPaid());
+		assertEquals("$18.40", dto.getAmountPaid());
 		assertEquals(uid, dto.getEmployeeId());
 		assertEquals(period, dto.getPayPeriod());
 	}
