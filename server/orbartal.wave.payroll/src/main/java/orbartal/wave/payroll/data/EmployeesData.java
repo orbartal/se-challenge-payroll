@@ -24,6 +24,11 @@ public class EmployeesData {
 		return employees.stream().collect(Collectors.toMap(e -> e.getUid(), e -> e));
 	}
 
+	public List<Long> readAllEmployeesUids() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

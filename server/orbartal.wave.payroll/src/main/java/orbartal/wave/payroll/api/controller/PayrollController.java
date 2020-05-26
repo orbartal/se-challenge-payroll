@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import orbartal.wave.payroll.application.PayrollApplication;
+import orbartal.wave.payroll.application.dto.PayrollReportDto;
 
 @RestController
 @RequestMapping("/v1/payroll")
@@ -26,8 +27,9 @@ public class PayrollController {
 	}
 
 	@RequestMapping(value = "/report", method = RequestMethod.GET)
-	public ResponseEntity<String> getReport() {
-		return new ResponseEntity<String>("report", HttpStatus.OK);
+	public ResponseEntity<PayrollReportDto> getReport() {
+		PayrollReportDto dto = payrollApplication.readPayrollReport();
+		return new ResponseEntity<PayrollReportDto>(dto, HttpStatus.OK);
 	}
 
 }

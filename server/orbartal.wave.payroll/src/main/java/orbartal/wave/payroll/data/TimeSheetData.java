@@ -1,5 +1,6 @@
 package orbartal.wave.payroll.data;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -40,6 +41,10 @@ public class TimeSheetData {
 		Map<String, JobGroupEntity> jobGroupByName = jobGroupData.readAllJobGroups();
 		Map<Long, EmployeeEntity> employeeByUid = employeesData.saveAndReadEmployeesByUids(timeSheet);
 		timeReportItemData.saveNewTimeReportItems(timeSheet.getRows(), timeReport, jobGroupByName, employeeByUid);
+	}
+
+	public List<Long> readAllEmployeesUids() {
+		return employeesData.readAllEmployeesUids();
 	}
 
 }

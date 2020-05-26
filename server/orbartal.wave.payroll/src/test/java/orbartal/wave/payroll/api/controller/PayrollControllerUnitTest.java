@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import orbartal.wave.payroll.application.PayrollApplication;
+import orbartal.wave.payroll.application.dto.PayrollReportDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PayrollControllerUnitTest {
@@ -46,6 +47,21 @@ public class PayrollControllerUnitTest {
 		assertEquals(originalFilename, actual.getBody());
 
 		verify(payrollApplication).uploadCsv(file);
+	}
+
+	@Test
+	public void testGetReport() throws Exception {
+		PayrollReportDto dto = mock(PayrollReportDto.class);
+
+		when(payrollApplication.readPayrollReport()).thenReturn(dto);
+
+		ResponseEntity<PayrollReportDto> actual = fixture.getReport();
+
+		assertNotNull(actual);
+		assertEquals(200, actual.getStatusCode().value());
+		assertEquals(dto, actual.getBody());
+
+		verify(payrollApplication).readPayrollReport();
 	}
 
 }

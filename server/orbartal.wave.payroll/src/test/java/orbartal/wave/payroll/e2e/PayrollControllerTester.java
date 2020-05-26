@@ -47,14 +47,25 @@ public class PayrollControllerTester {
 	}
 
 	@Test
-	public void testGetReport() {
-		Object actual = RestAssured.given().accept(ContentType.TEXT).when().get(API_PATH_REPORT).andReturn();
+	public void testGetReportWithEmptyData() {
+		Object actual = RestAssured.given().accept(ContentType.JSON).when().get(API_PATH_REPORT).andReturn();
 
 		Assertions.assertNotNull(actual);
 		Assertions.assertEquals(RestAssuredResponseImpl.class, actual.getClass());
 		RestAssuredResponseImpl response = (RestAssuredResponseImpl)actual;
 		Assertions.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-		Assertions.assertEquals("report", response.getBody().asString());
+	}
+	
+	@Test
+	public void testGetReportWithNonEmptyData() throws IOException {
+		testUploadCsv();
+		Object actual = RestAssured.given().accept(ContentType.JSON).when().get(API_PATH_REPORT).andReturn();
+
+		Assertions.assertNotNull(actual);
+		Assertions.assertEquals(RestAssuredResponseImpl.class, actual.getClass());
+		RestAssuredResponseImpl response = (RestAssuredResponseImpl)actual;
+		Assertions.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+		//Assertions.assertEquals("report", response.getBody().asString());
 	}
 
 	private static File getCsvExampleInputFile() throws IOException {
