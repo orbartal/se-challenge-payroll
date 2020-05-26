@@ -22,7 +22,7 @@ mvn clean install test
 mvn spring-boot:run
 
 Open any browser in url: http://localhost:8081/swagger-ui.html#
-And use swagger as the web client for the person server
+And use swagger as the web client for the se-challenge-payroll server
 
 
 (2) Answers to the following questions
