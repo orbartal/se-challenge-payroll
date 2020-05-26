@@ -15,7 +15,7 @@ public class EmployeeEntity {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "uid", nullable = false)
+	@Column(name = "uid", nullable = false, unique=true)
 	private Long uid;
 
 	public Long getId() {
