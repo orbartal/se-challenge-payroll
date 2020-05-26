@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import orbartal.wave.payroll.application.domain.EmployeeReportDto;
 import orbartal.wave.payroll.application.domain.PayrollReportDto;
 import orbartal.wave.payroll.logic.EmployeesLogicReader;
 
 @Service
+@Transactional(readOnly = true)
 public class PayrollAppReader {
 
 	@Autowired

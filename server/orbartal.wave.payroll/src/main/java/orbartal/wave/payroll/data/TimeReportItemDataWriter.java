@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import orbartal.wave.payroll.data.domain.EmployeeEntity;
 import orbartal.wave.payroll.data.domain.JobGroupEntity;
@@ -15,6 +16,7 @@ import orbartal.wave.payroll.data.repository.TimeReportItemRepository;
 import orbartal.wave.payroll.logic.domain.TimeSheetRowInfo;
 
 @Service
+@Transactional
 public class TimeReportItemDataWriter {
 
 	@Autowired

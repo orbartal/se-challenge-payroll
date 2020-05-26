@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import orbartal.wave.payroll.application.domain.EmployeeReportDto;
 import orbartal.wave.payroll.application.domain.PayPeriodDto;
@@ -15,6 +16,7 @@ import orbartal.wave.payroll.logic.factory.EmployeeReportFactory;
 import orbartal.wave.payroll.logic.factory.PayPeriodFactory;
 
 @Service
+@Transactional(readOnly = true)
 public class TimeReportItemDataReader {
 
 	@Autowired
