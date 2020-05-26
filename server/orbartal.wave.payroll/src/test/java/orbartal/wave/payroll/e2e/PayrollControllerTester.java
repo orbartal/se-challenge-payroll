@@ -2,8 +2,6 @@ package orbartal.wave.payroll.e2e;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Date;
 
 import org.junit.Test;
@@ -14,6 +12,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.internal.RestAssuredResponseImpl;
 import io.restassured.response.Response;
+import orbartal.wave.payroll.utils.CsvExampleReader;
 
 public class PayrollControllerTester {
 
@@ -21,17 +20,34 @@ public class PayrollControllerTester {
 	private static final String API_PATH_CSV = API_PATH+"/"+"csv";
 	private static final String API_PATH_REPORT = API_PATH+"/"+"report";
 	private static final String CSV_FILE_NAME = "time-report-42.csv";
-
+	
+	private CsvExampleReader filesReader = new CsvExampleReader();
+	
+	//Note: We must restart the server before each run of this test because we cannot delete data that was inserted to the server
 	@Test
-	public void testExampleCsv() throws IOException {
-		File csv = getCsvExampleInputFile();
-	    String content = new String(Files.readAllBytes(Paths.get(csv.getAbsolutePath())));
+	public void testAll() throws IOException {
+		testReadExampleCsv();
+		testReadExampleJson();
+		testGetReportWithEmptyData();
+		testUploadCsv();
+		testGetReportWithNonEmptyData();
+	}
+
+
+	public void testReadExampleCsv() throws IOException {
+		File csv = filesReader.getCsvExampleInputFile();
+	    String content = filesReader.readFileContent(csv);
+		Assertions.assertNotNull(content);
+	}
+	
+	public void testReadExampleJson() throws IOException {
+		File json = filesReader.getJsonExampleOutputFile();
+	    String content = filesReader.readFileContent(json);
 		Assertions.assertNotNull(content);
 	}
 
-	@Test
 	public void testUploadCsv() throws IOException {
-		File csv = getCsvExampleInputFile();
+		File csv = filesReader.getCsvExampleInputFile();
 
 		Response actual = RestAssured.given()
 				.param("timestamp", new Date().getTime())
@@ -46,7 +62,6 @@ public class PayrollControllerTester {
 		Assertions.assertEquals(CSV_FILE_NAME, actual.getBody().asString());
 	}
 
-	@Test
 	public void testGetReportWithEmptyData() {
 		Object actual = RestAssured.given().accept(ContentType.JSON).when().get(API_PATH_REPORT).andReturn();
 
@@ -55,26 +70,19 @@ public class PayrollControllerTester {
 		RestAssuredResponseImpl response = (RestAssuredResponseImpl)actual;
 		Assertions.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 	}
-	
-	@Test
+
 	public void testGetReportWithNonEmptyData() throws IOException {
-		testUploadCsv();
 		Object actual = RestAssured.given().accept(ContentType.JSON).when().get(API_PATH_REPORT).andReturn();
 
 		Assertions.assertNotNull(actual);
 		Assertions.assertEquals(RestAssuredResponseImpl.class, actual.getClass());
 		RestAssuredResponseImpl response = (RestAssuredResponseImpl)actual;
 		Assertions.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-		//Assertions.assertEquals("report", response.getBody().asString());
-	}
-
-	private static File getCsvExampleInputFile() throws IOException {
-		File f = new File (new File(".").getCanonicalPath());
-		for (int i=0; i<2; i++) {
-			f = new File (f.getParent());
-		}
-		String pathFull = f.getAbsolutePath() + "/" + CSV_FILE_NAME;
-		return new File(pathFull);
+		
+		File outputPath = filesReader.getJsonExampleOutputFile();
+		String expectedJsonOutput = filesReader.readFileContent(outputPath);
+		String actualJsonOutput = response.getBody().asString();
+		Assertions.assertEquals(expectedJsonOutput, actualJsonOutput);
 	}
 
 }
