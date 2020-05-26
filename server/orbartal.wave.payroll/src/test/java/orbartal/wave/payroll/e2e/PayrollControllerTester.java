@@ -12,30 +12,32 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.internal.RestAssuredResponseImpl;
 import io.restassured.response.Response;
-import orbartal.wave.payroll.utils.CsvExampleReader;
+import orbartal.wave.payroll.utils.TestFilesReader;
 
 public class PayrollControllerTester {
 
 	private static final String API_PATH = "http://localhost:8081/v1/payroll";
 	private static final String API_PATH_CSV = API_PATH+"/"+"csv";
 	private static final String API_PATH_REPORT = API_PATH+"/"+"report";
-	private static final String CSV_FILE_NAME = "time-report-42.csv";
+	//private static final String CSV_FILE_41 = "time-report-41.csv";
+	//private static final String CSV_FILE_42 = "time-report-42.csv";
 	
-	private CsvExampleReader filesReader = new CsvExampleReader();
+	private TestFilesReader filesReader = new TestFilesReader();
 	
 	//Note: We must restart the server before each run of this test because we cannot delete data that was inserted to the server
 	@Test
 	public void testAll() throws IOException {
 		testReadExampleCsv();
 		testReadExampleJson();
+		testUploadCsv41();
 		testGetReportWithEmptyData();
-		testUploadCsv();
+		testUploadCsv42();
 		testGetReportWithNonEmptyData();
 	}
 
 
 	public void testReadExampleCsv() throws IOException {
-		File csv = filesReader.getCsvExampleInputFile();
+		File csv = filesReader.readCsvInputFile42();
 	    String content = filesReader.readFileContent(csv);
 		Assertions.assertNotNull(content);
 	}
@@ -45,10 +47,19 @@ public class PayrollControllerTester {
 	    String content = filesReader.readFileContent(json);
 		Assertions.assertNotNull(content);
 	}
+	
+	public void testUploadCsv41() throws IOException {
+		File csv = filesReader.readCsvInputFile41();
+		uploadCsv(csv);
+	}
 
-	public void testUploadCsv() throws IOException {
-		File csv = filesReader.getCsvExampleInputFile();
+	public void testUploadCsv42() throws IOException {
+		File csv = filesReader.readCsvInputFile42();
+		uploadCsv(csv);
+	}
 
+
+	private void uploadCsv(File csv) throws IOException {
 		Response actual = RestAssured.given()
 				.param("timestamp", new Date().getTime())
 				.multiPart("file", csv)
@@ -59,7 +70,7 @@ public class PayrollControllerTester {
 
 		Assertions.assertNotNull(actual);
 		Assertions.assertEquals(HttpStatus.OK.value(), actual.statusCode());
-		Assertions.assertEquals(CSV_FILE_NAME, actual.getBody().asString());
+		Assertions.assertEquals(csv.getName(), actual.getBody().asString());
 	}
 
 	public void testGetReportWithEmptyData() {

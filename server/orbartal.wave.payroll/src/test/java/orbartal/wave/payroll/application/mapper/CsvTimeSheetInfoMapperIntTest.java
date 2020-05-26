@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import orbartal.wave.payroll.logic.domain.TimeSheetRowInfo;
 import orbartal.wave.payroll.logic.domain.TimeSheetTableInfo;
-import orbartal.wave.payroll.utils.CsvExampleReader;
+import orbartal.wave.payroll.utils.TestFilesReader;
 
 public class CsvTimeSheetInfoMapperIntTest {
 
@@ -46,9 +46,9 @@ public class CsvTimeSheetInfoMapperIntTest {
 
 	@Test
 	public void testUploadCsv() throws Exception {
-		CsvExampleReader csvExampleReader = new CsvExampleReader();
+		TestFilesReader csvExampleReader = new TestFilesReader();
 		String fileName = csvExampleReader.getCsvExampleInputFileName();
-		File csv = csvExampleReader.getCsvExampleInputFile();
+		File csv = csvExampleReader.readCsvInputFile42();
 		String content = new String(Files.readAllBytes(Paths.get(csv.getAbsolutePath())));
 		InputStream inputStream = new ByteArrayInputStream(content.getBytes());
 		MultipartFile file = mock(MultipartFile.class);
