@@ -1,3 +1,56 @@
+# Or Bartal notes on Wave Software Development Challenge
+
+### Documentation:
+
+Please commit the following to this `README.md`:
+
+1. Instructions on how to build/run your application
+
+How to build, test, run and use the project server
+
+Download the project from url: https://github.com/orbartal/se-challenge-payroll
+
+Install java 8 https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+Install maven https://www.baeldung.com/install-maven-on-windows-linux-mac
+
+In the terminal\cmd cd into dir “interview.challenge.people” and run:
+
+4.1. mvn clean install test
+
+4.2. mvn spring-boot:run
+
+Open any browser in url: http://localhost:8081/swagger-ui.html#
+And use swagger as the web client for the person server
+
+1. Answers to the following questions:
+   - How did you test that your implementation was correct?
+   
+   I first wrote E2E test that are independent from the implementation and test the entire product using the rest api.
+   I then use the E2E as guidance for implementation using TDD. I first wrote unit or integration test for each feature/class/method and only then wrote the main code that make the test pass. 
+   
+   - If this application was destined for a production environment, what would you add or change?
+   
+I would first talk with the customer and ask some question to clearify the task:
+1. Can an employee ever shift between the two groups? For example, doctors and nurses rarely do, but week and weekend employees or day and night shift change constantly. 
+1. What about paging? I was asked not to use it and to assume the list of employees is small enough but in a real environment I will use paging.
+1. Can I assume all salaries are in USA dollars. Is taxation or any other calculation needed?
+1. Who has permmision to access the API?
+1. How often is the API used? Should we seperate the read and write API for preformance?
+1. What other API and feature are plan in the road map? What are there scope and priorities.
+
+   - What compromises did you have to make as a result of the time constraints of this challenge?
+In production I would have had:
+1. Validate input
+1. Paging for output
+1. Asynchrony IO - for performance. Large or many file upload might consume the entire thread pool. 
+1. Add security. Might not need it at this micro service but somewhere in the system.
+1. Event sourcing
+1. Message broker
+1. External log (for example use another micro service dedicate for storing logs).
+1. Run the micro service in docker manage by kubernetes 
+
+
 # Wave Software Development Challenge
 
 Applicants for the Full-stack Developer role at Wave must
