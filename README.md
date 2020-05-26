@@ -50,8 +50,11 @@ I would first talk with the customer and ask some question to clearify the task:
 (2.3) What compromises did you have to make as a result of the time constraints of this challenge?
 
 In production I would have had:
-1. Validate input
-1. Paging for output
+1. Use real DB instead of in memeory DB (that is clear on every restart).
+1. Use real single page client instead of build in swagger.
+1. Validate input.
+1. Paging for output.
+1. Add exception handling with meaningful error messages.
 1. Asynchrony IO - for performance. Large or many file upload might consume the entire thread pool. 
 1. Add security. Might not need it at this micro service but somewhere in the system.
 1. Event sourcing
