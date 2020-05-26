@@ -15,7 +15,7 @@ Install java 8 https://www.oracle.com/technetwork/java/javase/downloads/jdk8-dow
 
 Install maven https://www.baeldung.com/install-maven-on-windows-linux-mac
 
-In the terminal\cmd cd into dir “interview.challenge.people” and run:
+In the terminal\cmd cd into dir “se-challenge-payroll” and run:
 
 mvn clean install test
 
