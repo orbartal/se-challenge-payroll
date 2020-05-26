@@ -29,8 +29,11 @@ And use swagger as the web client for the person server
 
   (2.1) How did you test that your implementation was correct?
    
-   I first wrote E2E test that are independent from the implementation and test the entire product using the rest api.
-   I then use the E2E as guidance for implementation using TDD. I first wrote unit or integration test for each feature/class/method and only then wrote the main code that make the test pass. 
+   I wrote E2E tests that  test the entire product using the rest api.
+   The E2E are independent from the implementation.
+   I wrote the E2E tests before I started working on the actual product.
+   I then use the E2E as guidance for implementation. I also used TDD while writing the product code. 
+   I first wrote a fail test for each feature/class/method and only then wrote the main code that make the test pass. 
    
  (2.2) If this application was destined for a production environment, what would you add or change?
    
