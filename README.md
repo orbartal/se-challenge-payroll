@@ -45,7 +45,9 @@ I would first talk with the customer and ask some question to clearify the task:
 1. How often is the API used? Should we seperate the read and write API for preformance?
 1. What other API and feature are plan in the road map? What are there scope and priorities.
 
-   - What compromises did you have to make as a result of the time constraints of this challenge?
+
+(2.3) What compromises did you have to make as a result of the time constraints of this challenge?
+
 In production I would have had:
 1. Validate input
 1. Paging for output
