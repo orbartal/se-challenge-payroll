@@ -1,4 +1,4 @@
-package orbartal.wave.payroll.info;
+package orbartal.wave.payroll.logic.domain;
 
 import java.util.List;
 

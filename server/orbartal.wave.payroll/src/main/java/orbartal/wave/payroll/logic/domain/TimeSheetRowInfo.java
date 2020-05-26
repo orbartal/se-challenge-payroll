@@ -1,4 +1,4 @@
-package orbartal.wave.payroll.info;
+package orbartal.wave.payroll.logic.domain;
 
 import java.time.LocalDate;
 
@@ -7,9 +7,9 @@ public class TimeSheetRowInfo {
 	private final LocalDate date;
 	private final double hoursWorked;	
 	private final long employeeId;
-	private final JobGroup jobGroup;
+	private final JobGroupEnum jobGroup;
 
-	public TimeSheetRowInfo(LocalDate date, double hoursWorked, long employeeId, JobGroup jobGroup) {
+	public TimeSheetRowInfo(LocalDate date, double hoursWorked, long employeeId, JobGroupEnum jobGroup) {
 		this.date = date;
 		this.hoursWorked = hoursWorked;
 		this.employeeId = employeeId;
@@ -28,7 +28,7 @@ public class TimeSheetRowInfo {
 		return employeeId;
 	}
 
-	public JobGroup getJobGroup() {
+	public JobGroupEnum getJobGroup() {
 		return jobGroup;
 	}
 

@@ -9,7 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import orbartal.wave.payroll.data.entity.TimeReportItemEntity;
+import orbartal.wave.payroll.data.domain.TimeReportItemEntity;
 
 @Repository
 public interface TimeReportItemRepository extends PagingAndSortingRepository<TimeReportItemEntity, Long>{

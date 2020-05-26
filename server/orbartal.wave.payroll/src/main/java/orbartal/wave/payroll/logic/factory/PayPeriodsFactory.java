@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import orbartal.wave.payroll.application.dto.PayPeriodDto;
+import orbartal.wave.payroll.application.domain.PayPeriodDto;
 
 @Service
 public class PayPeriodsFactory {

@@ -9,7 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import orbartal.wave.payroll.data.entity.EmployeeEntity;
+import orbartal.wave.payroll.data.domain.EmployeeEntity;
 
 @Repository
 public interface EmployeeRepository extends PagingAndSortingRepository<EmployeeEntity, Long> {

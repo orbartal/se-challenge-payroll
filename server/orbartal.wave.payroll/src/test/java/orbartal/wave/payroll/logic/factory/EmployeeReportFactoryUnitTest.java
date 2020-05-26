@@ -16,11 +16,11 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import orbartal.wave.payroll.application.dto.EmployeeReportDto;
-import orbartal.wave.payroll.application.dto.PayPeriodDto;
-import orbartal.wave.payroll.data.entity.JobGroupEntity;
-import orbartal.wave.payroll.data.entity.TimeReportItemEntity;
-import orbartal.wave.payroll.info.JobGroup;
+import orbartal.wave.payroll.application.domain.EmployeeReportDto;
+import orbartal.wave.payroll.application.domain.PayPeriodDto;
+import orbartal.wave.payroll.data.domain.JobGroupEntity;
+import orbartal.wave.payroll.data.domain.TimeReportItemEntity;
+import orbartal.wave.payroll.logic.domain.JobGroupEnum;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EmployeeReportFactoryUnitTest {
@@ -30,9 +30,9 @@ public class EmployeeReportFactoryUnitTest {
 
 	@Test
 	public void testCalculateAmount() throws Exception {
-		TimeReportItemEntity e1 = buildItem(5.0, JobGroup.A);
-		TimeReportItemEntity e2 = buildItem(20.0, JobGroup.B);
-		TimeReportItemEntity e3 = buildItem(10.0, JobGroup.A);
+		TimeReportItemEntity e1 = buildItem(5.0, JobGroupEnum.A);
+		TimeReportItemEntity e2 = buildItem(20.0, JobGroupEnum.B);
+		TimeReportItemEntity e3 = buildItem(10.0, JobGroupEnum.A);
 
 		List<TimeReportItemEntity> items = Arrays.asList(e1, e2, e3);
 		
@@ -67,7 +67,7 @@ public class EmployeeReportFactoryUnitTest {
 		assertEquals(period, dto.getPayPeriod());
 	}
 
-	private TimeReportItemEntity buildItem(double h, JobGroup g) {
+	private TimeReportItemEntity buildItem(double h, JobGroupEnum g) {
 		TimeReportItemEntity e = new TimeReportItemEntity();
 		e.setHours(h);
 		JobGroupEntity jobGroupEntity = new JobGroupEntity();
@@ -77,7 +77,7 @@ public class EmployeeReportFactoryUnitTest {
 	}
 	
 	public double calculateAmount(List<TimeReportItemEntity> items) {
-		List<JobGroup> groups = Arrays.asList(JobGroup.values());
+		List<JobGroupEnum> groups = Arrays.asList(JobGroupEnum.values());
 		Map<String, Double> payByGroup = groups.stream().collect(Collectors.toMap(j->j.name(), j->j.getHourlyPay()));
 		return items.stream().mapToDouble(i->i.getHours()*payByGroup.get(i.getJobGroup().getName())).sum();
 	}

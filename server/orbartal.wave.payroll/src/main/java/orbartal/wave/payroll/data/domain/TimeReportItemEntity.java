@@ -1,4 +1,4 @@
-package orbartal.wave.payroll.data.entity;
+package orbartal.wave.payroll.data.domain;
 
 import java.time.LocalDate;
 

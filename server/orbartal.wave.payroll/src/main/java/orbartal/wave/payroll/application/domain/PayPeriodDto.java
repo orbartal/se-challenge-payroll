@@ -1,4 +1,4 @@
-package orbartal.wave.payroll.application.dto;
+package orbartal.wave.payroll.application.domain;
 
 import java.time.LocalDate;
 

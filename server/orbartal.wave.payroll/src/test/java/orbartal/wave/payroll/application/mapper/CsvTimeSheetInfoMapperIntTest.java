@@ -17,8 +17,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.multipart.MultipartFile;
 
-import orbartal.wave.payroll.info.TimeSheetRowInfo;
-import orbartal.wave.payroll.info.TimeSheetTableInfo;
+import orbartal.wave.payroll.logic.domain.TimeSheetRowInfo;
+import orbartal.wave.payroll.logic.domain.TimeSheetTableInfo;
 import orbartal.wave.payroll.utils.CsvExampleReader;
 
 public class CsvTimeSheetInfoMapperIntTest {

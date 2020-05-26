@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import orbartal.wave.payroll.application.dto.EmployeeReportDto;
-import orbartal.wave.payroll.application.dto.PayPeriodDto;
-import orbartal.wave.payroll.data.entity.TimeReportItemEntity;
+import orbartal.wave.payroll.application.domain.EmployeeReportDto;
+import orbartal.wave.payroll.application.domain.PayPeriodDto;
+import orbartal.wave.payroll.data.domain.TimeReportItemEntity;
 import orbartal.wave.payroll.data.repository.TimeReportItemRepository;
 import orbartal.wave.payroll.logic.factory.EmployeeReportFactory;
 import orbartal.wave.payroll.logic.factory.PayPeriodFactory;

@@ -1,4 +1,4 @@
-package orbartal.wave.payroll.data.entity;
+package orbartal.wave.payroll.data.domain;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -7,16 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="job_group")
-public class JobGroupEntity {
-
+@Table(name="employee")
+public class EmployeeEntity {
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "name", nullable = false)
-	private String name;
+	@Column(name = "uid", nullable = false)
+	private Long uid;
 
 	public Long getId() {
 		return id;
@@ -26,12 +26,12 @@ public class JobGroupEntity {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Long getUid() {
+		return uid;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUid(Long uid) {
+		this.uid = uid;
 	}
 
 }

@@ -1,4 +1,4 @@
-package orbartal.wave.payroll.api.controller;
+package orbartal.wave.payroll.api.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,26 +9,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import orbartal.wave.payroll.application.PayrollApplication;
-import orbartal.wave.payroll.application.dto.PayrollReportDto;
+import orbartal.wave.payroll.application.PayrollAppWriter;
+import orbartal.wave.payroll.application.PayrollAppReader;
+import orbartal.wave.payroll.application.domain.PayrollReportDto;
 
 @RestController
 @RequestMapping("/v1/payroll")
 public class PayrollController {
 
 	@Autowired
-	private PayrollApplication payrollApplication;
+	private PayrollAppReader payrollAppReader;
+
+	@Autowired
+	private PayrollAppWriter payrollAppWriter;
 
 	@RequestMapping(value = "/csv", method = RequestMethod.POST)
 	public ResponseEntity<String> uploadCsv(@RequestParam("file") MultipartFile file) throws RuntimeException {
 		String originalFilename = file.getOriginalFilename();
-		payrollApplication.uploadCsv(file);
+		payrollAppWriter.uploadCsv(file);
 		return new ResponseEntity<String>(originalFilename, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/report", method = RequestMethod.GET)
 	public ResponseEntity<PayrollReportDto> getReport() {
-		PayrollReportDto dto = payrollApplication.readPayrollReport();
+		PayrollReportDto dto = payrollAppReader.readPayrollReport();
 		return new ResponseEntity<PayrollReportDto>(dto, HttpStatus.OK);
 	}
 

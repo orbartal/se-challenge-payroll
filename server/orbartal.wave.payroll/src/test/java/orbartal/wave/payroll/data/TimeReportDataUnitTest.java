@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import orbartal.wave.payroll.data.entity.TimeReportEntity;
+import orbartal.wave.payroll.data.domain.TimeReportEntity;
 import orbartal.wave.payroll.data.repository.TimeReportRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -23,7 +23,7 @@ public class TimeReportDataUnitTest {
 	private TimeReportRepository timeReportRepository;
 
 	@InjectMocks
-	private TimeReportData fixture;
+	private TimeReportDataWriter fixture;
 
 	@After
 	public void runAfterTestMethod() {

@@ -7,15 +7,15 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import orbartal.wave.payroll.data.entity.EmployeeEntity;
-import orbartal.wave.payroll.data.entity.JobGroupEntity;
-import orbartal.wave.payroll.data.entity.TimeReportEntity;
-import orbartal.wave.payroll.data.entity.TimeReportItemEntity;
+import orbartal.wave.payroll.data.domain.EmployeeEntity;
+import orbartal.wave.payroll.data.domain.JobGroupEntity;
+import orbartal.wave.payroll.data.domain.TimeReportEntity;
+import orbartal.wave.payroll.data.domain.TimeReportItemEntity;
 import orbartal.wave.payroll.data.repository.TimeReportItemRepository;
-import orbartal.wave.payroll.info.TimeSheetRowInfo;
+import orbartal.wave.payroll.logic.domain.TimeSheetRowInfo;
 
 @Service
-public class TimeReportItemData {
+public class TimeReportItemDataWriter {
 
 	@Autowired
 	private TimeReportItemRepository timeReportItemRepository;

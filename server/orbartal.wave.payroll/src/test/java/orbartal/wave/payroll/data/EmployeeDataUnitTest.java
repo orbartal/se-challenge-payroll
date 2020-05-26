@@ -15,7 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import orbartal.wave.payroll.data.entity.EmployeeEntity;
+import orbartal.wave.payroll.data.domain.EmployeeEntity;
 import orbartal.wave.payroll.data.repository.EmployeeRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,7 +25,7 @@ public class EmployeeDataUnitTest {
 	private EmployeeRepository employeeRepository;
 
 	@InjectMocks
-	private EmployeeData fixture;
+	private EmployeeDataWriter fixture;
 
 	@After
 	public void runAfterTestMethod() {

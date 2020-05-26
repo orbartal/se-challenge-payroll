@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import orbartal.wave.payroll.application.dto.TimeSheetRowDto;
-import orbartal.wave.payroll.info.TimeSheetRowInfo;
-import orbartal.wave.payroll.info.TimeSheetTableInfo;
+import orbartal.wave.payroll.application.domain.TimeSheetRowDto;
+import orbartal.wave.payroll.logic.domain.TimeSheetRowInfo;
+import orbartal.wave.payroll.logic.domain.TimeSheetTableInfo;
 
 @Service
 public class CsvTimeSheetInfoMapper {

@@ -14,48 +14,23 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.web.multipart.MultipartFile;
 
-import orbartal.wave.payroll.application.dto.EmployeeReportDto;
-import orbartal.wave.payroll.application.dto.PayrollReportDto;
-import orbartal.wave.payroll.application.mapper.CsvTimeSheetInfoMapper;
-import orbartal.wave.payroll.data.TimeSheetData;
-import orbartal.wave.payroll.info.TimeSheetTableInfo;
+import orbartal.wave.payroll.application.domain.EmployeeReportDto;
+import orbartal.wave.payroll.application.domain.PayrollReportDto;
 import orbartal.wave.payroll.logic.EmployeesLogicReader;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PayrollApplicationUnitTest {
-
-	@Mock
-	private CsvTimeSheetInfoMapper csvTimeSheetRowInfoMapper;
-	
-	@Mock
-	private TimeSheetData timeSheetData;
+public class PayrollAppReaderUnitTest {
 
 	@Mock
 	private EmployeesLogicReader employeesLogicReader;
 
 	@InjectMocks
-	private PayrollApplication fixture;
+	private PayrollAppReader fixture;
 
 	@After
 	public void runAfterTestMethod() {
-		verifyNoMoreInteractions(csvTimeSheetRowInfoMapper);
-		verifyNoMoreInteractions(timeSheetData);
 		verifyNoMoreInteractions(employeesLogicReader);
-	}
-
-	@Test
-	public void testUploadCsv() throws Exception {
-		MultipartFile file = mock(MultipartFile.class);
-		TimeSheetTableInfo table = mock(TimeSheetTableInfo.class);
-
-		when(csvTimeSheetRowInfoMapper.readInfo(file)).thenReturn(table);
-
-		fixture.uploadCsv(file);
-
-		verify(csvTimeSheetRowInfoMapper).readInfo(file);
-		verify(timeSheetData).save(table);
 	}
 
 	@SuppressWarnings("unchecked")

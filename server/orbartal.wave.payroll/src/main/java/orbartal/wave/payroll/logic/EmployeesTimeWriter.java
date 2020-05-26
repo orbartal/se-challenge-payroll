@@ -1,4 +1,4 @@
-package orbartal.wave.payroll.data;
+package orbartal.wave.payroll.logic;
 
 import java.util.List;
 import java.util.Map;
@@ -8,14 +8,15 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import orbartal.wave.payroll.data.entity.EmployeeEntity;
-import orbartal.wave.payroll.info.TimeSheetTableInfo;
+import orbartal.wave.payroll.data.EmployeeDataWriter;
+import orbartal.wave.payroll.data.domain.EmployeeEntity;
+import orbartal.wave.payroll.logic.domain.TimeSheetTableInfo;
 
 @Service
-public class EmployeesData {
+public class EmployeesTimeWriter {
 
 	@Autowired
-	private EmployeeData employeeData;
+	private EmployeeDataWriter employeeData;
 
 	public Map<Long, EmployeeEntity> saveAndReadEmployeesByUids(TimeSheetTableInfo timeSheet) {
 		Set<Long> uids = timeSheet.getRows().stream().map(r -> r.getEmployeeId()).collect(Collectors.toSet());
@@ -23,12 +24,5 @@ public class EmployeesData {
 		//List<EmployeeEntity> employees2 = employeeRepository.readByUids(uids);
 		return employees.stream().collect(Collectors.toMap(e -> e.getUid(), e -> e));
 	}
-
-	public List<Long> readAllEmployeesUids() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 }

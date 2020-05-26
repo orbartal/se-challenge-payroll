@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import orbartal.wave.payroll.application.dto.TimeSheetRowDto;
-import orbartal.wave.payroll.info.JobGroup;
-import orbartal.wave.payroll.info.TimeSheetRowInfo;
+import orbartal.wave.payroll.application.domain.TimeSheetRowDto;
+import orbartal.wave.payroll.logic.domain.JobGroupEnum;
+import orbartal.wave.payroll.logic.domain.TimeSheetRowInfo;
 
 @Service
 public class TimeSheetRowDtoInfoMapper {
@@ -25,7 +25,7 @@ public class TimeSheetRowDtoInfoMapper {
 			LocalDate date = LocalDate.parse(dto.getDate(), DATE_FORMAT);
 			double hoursWorked = Double.parseDouble(dto.getHoursWorked());
 			long employeeId = Long.parseLong(dto.getEmployeeId());
-			JobGroup jobGroup = JobGroup.valueOf(dto.getJobGroup());
+			JobGroupEnum jobGroup = JobGroupEnum.valueOf(dto.getJobGroup());
 			return new TimeSheetRowInfo(date, hoursWorked, employeeId, jobGroup);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

@@ -19,7 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import orbartal.wave.payroll.application.dto.EmployeeReportDto;
+import orbartal.wave.payroll.application.domain.EmployeeReportDto;
 import orbartal.wave.payroll.data.EmployeeDataReader;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import orbartal.wave.payroll.application.dto.EmployeeReportDto;
-import orbartal.wave.payroll.application.dto.PayPeriodDto;
+import orbartal.wave.payroll.application.domain.EmployeeReportDto;
+import orbartal.wave.payroll.application.domain.PayPeriodDto;
 import orbartal.wave.payroll.data.TimeReportItemDataReader;
 import orbartal.wave.payroll.logic.factory.PayPeriodsFactory;
 

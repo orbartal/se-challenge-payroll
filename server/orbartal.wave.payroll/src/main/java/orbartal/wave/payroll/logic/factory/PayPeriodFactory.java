@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
 
-import orbartal.wave.payroll.application.dto.PayPeriodDto;
+import orbartal.wave.payroll.application.domain.PayPeriodDto;
 
 @Service
 public class PayPeriodFactory {

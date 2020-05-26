@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import orbartal.wave.payroll.application.dto.EmployeeReportDto;
-import orbartal.wave.payroll.application.dto.PayrollReportDto;
+import orbartal.wave.payroll.application.domain.EmployeeReportDto;
+import orbartal.wave.payroll.application.domain.PayrollReportDto;
 import orbartal.wave.payroll.data.EmployeeDataReader;
 
 @Service

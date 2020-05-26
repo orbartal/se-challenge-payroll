@@ -1,4 +1,4 @@
-package orbartal.wave.payroll.data;
+package orbartal.wave.payroll.logic;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -15,34 +15,44 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import orbartal.wave.payroll.data.entity.EmployeeEntity;
-import orbartal.wave.payroll.data.entity.JobGroupEntity;
-import orbartal.wave.payroll.data.entity.TimeReportEntity;
-import orbartal.wave.payroll.info.TimeSheetRowInfo;
-import orbartal.wave.payroll.info.TimeSheetTableInfo;
+import orbartal.wave.payroll.data.JobGroupDataWriter;
+import orbartal.wave.payroll.data.JobGroupDataReader;
+import orbartal.wave.payroll.data.TimeReportDataWriter;
+import orbartal.wave.payroll.data.TimeReportItemDataWriter;
+import orbartal.wave.payroll.data.domain.EmployeeEntity;
+import orbartal.wave.payroll.data.domain.JobGroupEntity;
+import orbartal.wave.payroll.data.domain.TimeReportEntity;
+import orbartal.wave.payroll.logic.EmployeesTimeWriter;
+import orbartal.wave.payroll.logic.TimeSheetWriter;
+import orbartal.wave.payroll.logic.domain.TimeSheetRowInfo;
+import orbartal.wave.payroll.logic.domain.TimeSheetTableInfo;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TimeSheetDataUnitTest {
+public class TimeSheetWriterUnitTest {
 
 	@Mock
-	private TimeReportData timeReportData;
+	private TimeReportDataWriter timeReportData;
 
 	@Mock
-	private JobGroupData jobGroupData;
+	private JobGroupDataWriter jobGroupData;
 
 	@Mock
-	private EmployeesData employeesData;
+	private JobGroupDataReader jobGroupDataReader;
 
 	@Mock
-	private TimeReportItemData timeReportItemData;
+	private EmployeesTimeWriter employeesData;
+
+	@Mock
+	private TimeReportItemDataWriter timeReportItemData;
 
 	@InjectMocks
-	private TimeSheetData fixture;
+	private TimeSheetWriter fixture;
 
 	@After
 	public void runAfterTestMethod() {
 		verifyNoMoreInteractions(timeReportData);
 		verifyNoMoreInteractions(jobGroupData);
+		verifyNoMoreInteractions(jobGroupDataReader);
 		verifyNoMoreInteractions(employeesData);
 		verifyNoMoreInteractions(timeReportItemData);
 	}
@@ -58,14 +68,14 @@ public class TimeSheetDataUnitTest {
 		TimeSheetTableInfo timeSheet = new TimeSheetTableInfo(reportId, rows);
 
 		when(timeReportData.saveNewTimeReport(reportId)).thenReturn(timeReport);
-		when(jobGroupData.readAllJobGroups()).thenReturn(jobGroupByName);
+		when(jobGroupDataReader.readAllJobGroups()).thenReturn(jobGroupByName);
 		when(employeesData.saveAndReadEmployeesByUids(timeSheet)).thenReturn(employeeByUid);
 		when(timeReportItemData.saveNewTimeReportItems(rows, timeReport, jobGroupByName, employeeByUid)).thenReturn(null);
 
 		fixture.save(timeSheet);
 
 		verify(timeReportData).saveNewTimeReport(reportId);
-		verify(jobGroupData).readAllJobGroups();
+		verify(jobGroupDataReader).readAllJobGroups();
 		verify(employeesData).saveAndReadEmployeesByUids(timeSheet);
 		verify(timeReportItemData).saveNewTimeReportItems(rows, timeReport, jobGroupByName, employeeByUid);
 	}

@@ -21,18 +21,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import orbartal.wave.payroll.data.entity.EmployeeEntity;
-import orbartal.wave.payroll.info.TimeSheetRowInfo;
-import orbartal.wave.payroll.info.TimeSheetTableInfo;
+import orbartal.wave.payroll.data.domain.EmployeeEntity;
+import orbartal.wave.payroll.logic.EmployeesTimeWriter;
+import orbartal.wave.payroll.logic.domain.TimeSheetRowInfo;
+import orbartal.wave.payroll.logic.domain.TimeSheetTableInfo;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EmployeesDataUnitTest {
 
 	@Mock
-	private EmployeeData employeeData;
+	private EmployeeDataWriter employeeData;
 
 	@InjectMocks
-	private EmployeesData fixture;
+	private EmployeesTimeWriter fixture;
 
 	@After
 	public void runAfterTestMethod() {

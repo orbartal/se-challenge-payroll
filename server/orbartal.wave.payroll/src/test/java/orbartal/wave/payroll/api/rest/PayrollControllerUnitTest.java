@@ -1,4 +1,4 @@
-package orbartal.wave.payroll.api.controller;
+package orbartal.wave.payroll.api.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -16,21 +16,27 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
-import orbartal.wave.payroll.application.PayrollApplication;
-import orbartal.wave.payroll.application.dto.PayrollReportDto;
+import orbartal.wave.payroll.api.rest.PayrollController;
+import orbartal.wave.payroll.application.PayrollAppReader;
+import orbartal.wave.payroll.application.PayrollAppWriter;
+import orbartal.wave.payroll.application.domain.PayrollReportDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PayrollControllerUnitTest {
 
 	@Mock
-	private PayrollApplication payrollApplication;
+	private PayrollAppReader payrollAppReader;
+	
+	@Mock
+	private PayrollAppWriter payrollAppWriter;
 
 	@InjectMocks
 	private PayrollController fixture;
 
 	@After
 	public void runAfterTestMethod() {
-		verifyNoMoreInteractions(payrollApplication);
+		verifyNoMoreInteractions(payrollAppReader);
+		verifyNoMoreInteractions(payrollAppWriter);
 	}
 
 	@Test
@@ -46,14 +52,14 @@ public class PayrollControllerUnitTest {
 		assertEquals(200, actual.getStatusCode().value());
 		assertEquals(originalFilename, actual.getBody());
 
-		verify(payrollApplication).uploadCsv(file);
+		verify(payrollAppWriter).uploadCsv(file);
 	}
 
 	@Test
 	public void testGetReport() throws Exception {
 		PayrollReportDto dto = mock(PayrollReportDto.class);
 
-		when(payrollApplication.readPayrollReport()).thenReturn(dto);
+		when(payrollAppReader.readPayrollReport()).thenReturn(dto);
 
 		ResponseEntity<PayrollReportDto> actual = fixture.getReport();
 
@@ -61,7 +67,7 @@ public class PayrollControllerUnitTest {
 		assertEquals(200, actual.getStatusCode().value());
 		assertEquals(dto, actual.getBody());
 
-		verify(payrollApplication).readPayrollReport();
+		verify(payrollAppReader).readPayrollReport();
 	}
 
 }

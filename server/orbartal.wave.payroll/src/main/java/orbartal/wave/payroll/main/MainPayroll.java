@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan("orbartal.wave.payroll")
 @EnableJpaRepositories("orbartal.wave.payroll.data.repository")
-@EntityScan("orbartal.wave.payroll.data.entity")   
+@EntityScan("orbartal.wave.payroll.data.domain")   
 public class MainPayroll {
 	public static void main(String[] args) {
 		SpringApplication.run(MainPayroll.class, args); 

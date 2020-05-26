@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
-import orbartal.wave.payroll.application.dto.TimeSheetRowDto;
+import orbartal.wave.payroll.application.domain.TimeSheetRowDto;
 
 @Service
 public class TimeSheetRowCsvDtoMapper {
