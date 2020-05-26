@@ -32,6 +32,7 @@ public class PayrollControllerTester {
 		testUploadCsv41();
 		testGetReportWithEmptyData();
 		testUploadCsv42();
+		testUploadCsv42Again();
 		testGetReportWithNonEmptyData();
 	}
 
@@ -50,16 +51,30 @@ public class PayrollControllerTester {
 	
 	public void testUploadCsv41() throws IOException {
 		File csv = filesReader.readCsvInputFile41();
-		uploadCsv(csv);
+		uploadCsvAndAssert(csv);
 	}
 
 	public void testUploadCsv42() throws IOException {
 		File csv = filesReader.readCsvInputFile42();
-		uploadCsv(csv);
+		uploadCsvAndAssert(csv);
+	}
+	
+	private void testUploadCsv42Again() throws IOException {
+		File csv = filesReader.readCsvInputFile42();
+		Response actual = uploadCsv(csv);
+		Assertions.assertNotNull(actual);
+		Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), actual.statusCode());
 	}
 
 
-	private void uploadCsv(File csv) throws IOException {
+	private void uploadCsvAndAssert(File csv) throws IOException {
+		Response actual = uploadCsv(csv);
+		Assertions.assertNotNull(actual);
+		Assertions.assertEquals(HttpStatus.OK.value(), actual.statusCode());
+		Assertions.assertEquals(csv.getName(), actual.getBody().asString());
+	}
+
+	private Response uploadCsv(File csv) {
 		Response actual = RestAssured.given()
 				.param("timestamp", new Date().getTime())
 				.multiPart("file", csv)
@@ -67,10 +82,7 @@ public class PayrollControllerTester {
 				.when()
 				.post(API_PATH_CSV)
 				.andReturn();
-
-		Assertions.assertNotNull(actual);
-		Assertions.assertEquals(HttpStatus.OK.value(), actual.statusCode());
-		Assertions.assertEquals(csv.getName(), actual.getBody().asString());
+		return actual;
 	}
 
 	public void testGetReportWithEmptyData() {

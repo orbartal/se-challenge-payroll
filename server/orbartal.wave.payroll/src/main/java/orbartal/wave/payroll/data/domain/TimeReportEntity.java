@@ -15,7 +15,7 @@ public class TimeReportEntity {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="uid")
+	@Column(name="uid", unique=true)
 	private String uid;
 
 	public Long getId() {
