@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import orbartal.wave.payroll.application.PayrollAppWriter;
 import orbartal.wave.payroll.application.PayrollAppReader;
 import orbartal.wave.payroll.application.domain.PayrollReportDto;
+import orbartal.wave.payroll.application.domain.PayrollReportResponse;
 
 @RestController
 @RequestMapping("/v1/payroll")
@@ -31,9 +32,11 @@ public class PayrollController {
 	}
 
 	@RequestMapping(value = "/report", method = RequestMethod.GET)
-	public ResponseEntity<PayrollReportDto> getReport() {
+	public ResponseEntity<PayrollReportResponse> getReport() {
 		PayrollReportDto dto = payrollAppReader.readPayrollReport();
-		return new ResponseEntity<PayrollReportDto>(dto, HttpStatus.OK);
+		PayrollReportResponse response = new PayrollReportResponse();
+		response.setPayrollReport(dto);
+		return new ResponseEntity<PayrollReportResponse>(response, HttpStatus.OK);
 	}
 
 }

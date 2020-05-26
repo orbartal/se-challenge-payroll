@@ -20,6 +20,7 @@ import orbartal.wave.payroll.api.rest.PayrollController;
 import orbartal.wave.payroll.application.PayrollAppReader;
 import orbartal.wave.payroll.application.PayrollAppWriter;
 import orbartal.wave.payroll.application.domain.PayrollReportDto;
+import orbartal.wave.payroll.application.domain.PayrollReportResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PayrollControllerUnitTest {
@@ -61,11 +62,11 @@ public class PayrollControllerUnitTest {
 
 		when(payrollAppReader.readPayrollReport()).thenReturn(dto);
 
-		ResponseEntity<PayrollReportDto> actual = fixture.getReport();
+		ResponseEntity<PayrollReportResponse> actual = fixture.getReport();
 
 		assertNotNull(actual);
 		assertEquals(200, actual.getStatusCode().value());
-		assertEquals(dto, actual.getBody());
+		assertEquals(dto, actual.getBody().getPayrollReport());
 
 		verify(payrollAppReader).readPayrollReport();
 	}
